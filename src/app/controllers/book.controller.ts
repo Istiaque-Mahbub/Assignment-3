@@ -15,13 +15,13 @@ const createBookZodSchema = z.object({
 })
 
 const updatedBookZodSchema = z.object({
-   title:z.string(),
-   author:z.string(),
-   genre:z.string(),
-    isbn: z.string(),
+   title:z.string().optional(),
+   author:z.string().optional(),
+   genre:z.string().optional(),
+    isbn: z.string().optional(),
   description: z.string().optional(),
-  copies: z.number(),
-  available: z.boolean(),
+  copies: z.number().optional(),
+  available: z.boolean().optional(),
 })
 
 //post book
@@ -87,7 +87,8 @@ booksRoute.get('/:bookId',async(req:Request,res:Response)=>{
 
 //update book by id
 booksRoute.put('/:bookId',async(req:Request,res:Response)=>{
-    const id = req.params.bookId
+    try {
+        const id = req.params.bookId
     const updateBook = await updatedBookZodSchema.parseAsync(req.body)
     const book = await Book.findByIdAndUpdate(id,updateBook,{new:true})
 
@@ -96,6 +97,13 @@ booksRoute.put('/:bookId',async(req:Request,res:Response)=>{
         massage:`${book?.title} updated`,
         data:book
     })
+    } catch (error) {
+         res.status(409).json({
+        success:false,
+        massage:"Something wrong try again",
+      
+    })
+    }
 })
 
 //delete by id
