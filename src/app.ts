@@ -13,4 +13,11 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Library management system ");
 });
 
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: 'API route not found',
+  });
+});
+
 export default app;

@@ -15,19 +15,28 @@ const createBookZodSchema = z.object({
 })
 
 const updatedBookZodSchema = z.object({
-   title:z.string().optional(),
-   author:z.string().optional(),
-   genre:z.string().optional(),
-    isbn: z.string().optional(),
+   title:z.string(),
+   author:z.string(),
+   genre:z.string(),
+    isbn: z.string(),
   description: z.string().optional(),
-  copies: z.number().optional(),
-  available: z.boolean().optional(),
+  copies: z.number(),
+  available: z.boolean(),
 })
 
 //post book
 booksRoute.post("/",async(req:Request,res:Response)=>{
  try {
        const body = await createBookZodSchema.parseAsync(req.body)
+
+       const uniqueIsbn = await Book.findOne({isbn:body.isbn})
+       if(uniqueIsbn){
+  res.status(409).json({
+        
+  "success": false,
+  "message": "Isbn must be unique",
+    })
+       }
 
     const book = await Book.create(body)
 
@@ -37,10 +46,11 @@ booksRoute.post("/",async(req:Request,res:Response)=>{
         data:book
     })
  } catch (error:any) {
-     res.status(201).json({
+    console.log(error)
+     res.status(409).json({
         "message": "Validation failed",
   "success": false,
-  error:error
+  error
     })
  }
 })

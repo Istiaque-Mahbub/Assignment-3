@@ -19,6 +19,7 @@ const bookSchema = new Schema<IBooks, BookStaticMethods>(
     isbn: {
       type: String,
       required: true,
+      unique:[true,"isbn number should be unique.Your isbn number {VALUE} is already in the database"]
     },
     description: { type: String, default: "" },
     copies: {

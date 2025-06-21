@@ -18,7 +18,7 @@ borrowRouter.post("/", async (req: Request, res: Response) => {
       data: borrowBook,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(409).json({
       success: true,
       message: "Something wrong please check book_id properly",
       error,
