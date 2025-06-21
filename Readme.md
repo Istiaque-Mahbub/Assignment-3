@@ -31,17 +31,17 @@ A RESTful API for managing books and borrowing operations in a library system. B
 
 ## 📁 Project Structure
 
-Assignment-3/
-├─ src/
-│ ├─ app/
-│ │ ├─ controllers/
-│ │ ├─ interfaces/
-│ │ ├─ models/
-│ ├─ app.ts
-│ └─ server.ts
-├─ package.json
-├─ tsconfig.json(rootDir:'./src';outDir:'./dist')
-├─ .gitignore(node_modules,.env,.vercel)
+Assignment-3/<br>
+├─ src/<br>
+│ ├─ app/<br>
+│ │ ├─ controllers/<br>
+│ │ ├─ interfaces/<br>
+│ │ ├─ models/<br>
+│ ├─ app.ts<br>
+│ └─ server.ts<br>
+├─ package.json<br>
+├─ tsconfig.json(rootDir:'./src';outDir:'./dist')<br>
+├─ .gitignore(node_modules,.env,.vercel)<br>
 
 ---
 
