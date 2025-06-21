@@ -59,11 +59,11 @@ booksRoute.post("/",async(req:Request,res:Response)=>{
 booksRoute.get('/',async(req:Request,res:Response)=>{
     ///api/books?filter=FANTASY&sortBy=createdAt&sort=desc&limit=5
     const {filter,sortBy,sort,limit} = req.query
-    let query={}
-    if(filter){
-        query = {genre:filter}
-    }
-    const books = await Book.find().sort({sortBy : sort == 'asc' ? 1 : -1} ).limit(Number(limit) || 10)
+    const query: any = filter ? { genre: filter } : {};
+    // if(filter){
+    //     query = { genre: filter };
+    // }
+    const books = await Book.find(query).sort({[sortBy as string ] : sort == 'asc' ? 1 : -1} ).limit(Number(limit) || 10)
 
     res.status(201).json({
         success:true,
