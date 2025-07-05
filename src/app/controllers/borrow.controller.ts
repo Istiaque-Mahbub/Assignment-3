@@ -67,3 +67,16 @@ const borrowBooks = await Borrow.aggregate([
     data: borrowBooks,
   });
 });
+
+
+borrowRouter.delete('/:id',async(req:Request,res:Response)=>{
+   const id = req.params.id
+
+    await Borrow.findByIdAndDelete(id)
+
+   res.status(201).json({
+      "success": true,
+  "message": "Borrow Book deleted successfully",
+  "data": null
+   })
+})
